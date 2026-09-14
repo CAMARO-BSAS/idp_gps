@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Locomotoras - Año 2026</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Portada */
+        .cover-page {
+            text-align: center;
+            padding: 100px 20px;
+            page-break-after: always;
+            border-bottom: 3px solid #2E86AB;
+        }
+        
+        .cover-page h1 {
+            font-size: 42px;
+            color: #2E86AB;
+            margin-bottom: 20px;
+        }
+        
+        .cover-page .subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .cover-page .info {
+            font-size: 18px;
+            color: #888;
+            margin: 10px 0;
+        }
+        
+        /* Secciones */
+        .section {
+            margin: 40px 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #2E86AB;
+            border-bottom: 2px solid #2E86AB;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: #A23B72;
+            margin: 20px 0 10px 0;
+        }
+        
+        /* Resumen ejecutivo */
+        .summary-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2E86AB;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2E86AB;
+            margin: 10px 0;
+        }
+        
+        .stat-card .label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Tablas */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+        
+        .data-table thead {
+            background: #2E86AB;
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Alertas */
+        .alert {
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        
+        .alert-critical {
+            background: #ffe6e6;
+            border-color: #C73E1D;
+            color: #C73E1D;
+        }
+        
+        .alert-warning {
+            background: #fff4e6;
+            border-color: #F18F01;
+            color: #F18F01;
+        }
+        
+        .alert-success {
+            background: #e6f7f1;
+            border-color: #06A77D;
+            color: #06A77D;
+        }
+        
+        /* Recomendaciones */
+        .recommendations {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .recommendations ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .recommendations li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .recommendations li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #2E86AB;
+            font-weight: bold;
+        }
+        
+        /* Saltos de página */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+        }
+        
+        @media print {
+            .data-table {
+                font-size: 10px;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- PORTADA -->
+        <div class="cover-page">
+            <h1>🚂 REPORTE DE LOCOMOTORAS</h1>
+            <div class="subtitle">Análisis de Posicionamiento GPS</div>
+            <div class="info">Período: Año 2026</div>
+            <div class="info">Fecha del Reporte: 2026-09-13 19:18:22</div>
+            <div class="info">Total de Locomotoras: 203</div>
+        </div>
+        
+        <!-- RESUMEN EJECUTIVO -->
+        <div class="section">
+            <h2 class="section-title">📋 1. RESUMEN EJECUTIVO</h2>
+            
+            <div class="summary-box">
+                <h3>Objetivo del Reporte</h3>
+                <p>Análisis anual de las últimas posiciones GPS reportadas por locomotoras durante el año 2026, 
+                identificando locomotoras activas, inactivas y críticas que requieren atención inmediata.</p>
+            </div>
+            
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="label">🚂 Total Locomotoras</div>
+                    <div class="number">203</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">🚊 Líneas Ferroviarias</div>
+                    <div class="number">8</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">⚠️ Locomotoras Críticas</div>
+                    <div class="number">21</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">✅ Activas (24h)</div>
+                    <div class="number">0</div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Distribución por Línea Ferroviaria</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Línea</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                            <th>Días Promedio Sin Reportar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><strong>LU</strong></td>
+                            <td>15</td>
+                            <td>7.4%</td>
+                            <td>30.5 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>LGB</strong></td>
+                            <td>67</td>
+                            <td>33.0%</td>
+                            <td>28.7 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>LSM</strong></td>
+                            <td>107</td>
+                            <td>52.7%</td>
+                            <td>35.9 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SOFSE:ALIANZA-JUNIN</strong></td>
+                            <td>3</td>
+                            <td>1.5%</td>
+                            <td>20.3 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SOFSE:GUEMES-SALTA</strong></td>
+                            <td>4</td>
+                            <td>2.0%</td>
+                            <td>66.5 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SOFSE:RES-CACUI</strong></td>
+                            <td>4</td>
+                            <td>2.0%</td>
+                            <td>29.2 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SOFSE:RSAENZP-QTP</strong></td>
+                            <td>2</td>
+                            <td>1.0%</td>
+                            <td>167.5 días</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>SOFSE:TREN-NUBES</strong></td>
+                            <td>1</td>
+                            <td>0.5%</td>
+                            <td>205.0 días</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section page-break">
+            <h2 class="section-title">⚠️ 2. LOCOMOTORAS CRÍTICAS</h2>
+            
+            <div class="alert alert-critical">
+                <strong>🔴 ALERTA:</strong> 21 locomotoras llevan más de 3 meses (90 días) sin reportar posición GPS.
+                Esto representa el 10.3% del total de la flota.
+            </div>
+
+            <h3 class="section-subtitle">Top 20 Locomotoras Más Críticas</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Línea</th><th>Tren</th><th>Última Fecha</th><th>Última Hora</th><th>Última Lat</th><th>Última Lon</th><th>Días Sin Reportar</th><th>Estado</th></tr></thead>
+<tbody><tr><td>1</td><td>7758</td><td>SOFSE:RSAENZP-QTP</td><td>P55</td><td>2026-01-25 00:00:00</td><td>09:37:26</td><td>-26.7925</td><td>-60.44683333</td><td>231</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>9710</td><td>SOFSE:TREN-NUBES</td><td>1408</td><td>2026-02-20 00:00:00</td><td>14:55:43</td><td>-30.15572222</td><td>-64.53822222</td><td>205</td><td>Más de 3 meses</td></tr>
+<tr><td>3</td><td>7757</td><td>SOFSE:GUEMES-SALTA</td><td>P52</td><td>2026-02-23 00:00:00</td><td>21:12:11</td><td>-24.66683333</td><td>-65.0495</td><td>201</td><td>Más de 3 meses</td></tr>
+<tr><td>4</td><td>9781</td><td>LGB</td><td>9004</td><td>2026-03-06 00:00:00</td><td>03:39:48</td><td>-32.34016667</td><td>-61.38119444</td><td>191</td><td>Más de 3 meses</td></tr>
+<tr><td>5</td><td>8515</td><td>LSM</td><td>None</td><td>2026-03-14 00:00:00</td><td>10:23:58</td><td>-35.83580556</td><td>-61.91880556</td><td>183</td><td>Más de 3 meses</td></tr>
+<tr><td>6</td><td>6427</td><td>LSM</td><td>M40</td><td>2026-03-21 00:00:00</td><td>03:09:59</td><td>-31.97825</td><td>-68.47986111</td><td>176</td><td>Más de 3 meses</td></tr>
+<tr><td>7</td><td>6452</td><td>LSM</td><td>M39</td><td>2026-03-27 00:00:00</td><td>03:59:56</td><td>-31.97730556</td><td>-68.54266667</td><td>170</td><td>Más de 3 meses</td></tr>
+<tr><td>8</td><td>7951</td><td>LU</td><td>A68</td><td>2026-04-05 00:00:00</td><td>17:54:12</td><td>-31.38369444</td><td>-58.04705556</td><td>161</td><td>Más de 3 meses</td></tr>
+<tr><td>9</td><td>9739</td><td>LGB</td><td>1112</td><td>2026-04-08 00:00:00</td><td>14:15:38</td><td>-24.66977778</td><td>-65.04588889</td><td>158</td><td>Más de 3 meses</td></tr>
+<tr><td>10</td><td>8503</td><td>LSM</td><td>D67</td><td>2026-04-08 00:00:00</td><td>17:25:59</td><td>-33.0605</td><td>-68.53741667</td><td>158</td><td>Más de 3 meses</td></tr>
+<tr><td>11</td><td>8458</td><td>LSM</td><td>None</td><td>2026-04-11 00:00:00</td><td>00:16:04</td><td>-38.31511111</td><td>-62.65930556</td><td>155</td><td>Más de 3 meses</td></tr>
+<tr><td>12</td><td>6465</td><td>LSM</td><td>M60</td><td>2026-04-18 00:00:00</td><td>09:13:50</td><td>-33.04577778</td><td>-68.56488889</td><td>148</td><td>Más de 3 meses</td></tr>
+<tr><td>13</td><td>8483</td><td>LSM</td><td>R73</td><td>2026-04-22 00:00:00</td><td>13:29:41</td><td>-34.60438889</td><td>-58.55947222</td><td>144</td><td>Más de 3 meses</td></tr>
+<tr><td>14</td><td>6453</td><td>LSM</td><td>R28</td><td>2026-05-06 00:00:00</td><td>15:46:35</td><td>-34.25966667</td><td>-62.71488889</td><td>130</td><td>Más de 3 meses</td></tr>
+<tr><td>15</td><td>9455</td><td>LSM</td><td>R62</td><td>2026-05-16 00:00:00</td><td>00:47:37</td><td>-32.66469444</td><td>-60.73688889</td><td>120</td><td>Más de 3 meses</td></tr>
+<tr><td>16</td><td>9476</td><td>LSM</td><td>C24</td><td>2026-05-15 00:00:00</td><td>21:30:09</td><td>-34.65761111</td><td>-59.44766667</td><td>120</td><td>Más de 3 meses</td></tr>
+<tr><td>17</td><td>9441</td><td>LSM</td><td>I46</td><td>2026-05-17 00:00:00</td><td>09:15:59</td><td>-33.01822222</td><td>-60.75333333</td><td>119</td><td>Más de 3 meses</td></tr>
+<tr><td>18</td><td>9738</td><td>LGB</td><td>5005</td><td>2026-05-25 00:00:00</td><td>03:42:50</td><td>-25.31630556</td><td>-64.91230556</td><td>111</td><td>Más de 3 meses</td></tr>
+<tr><td>19</td><td>8498</td><td>LSM</td><td>R32</td><td>2026-05-30 00:00:00</td><td>04:25:04</td><td>-34.10402778</td><td>-65.07308333</td><td>106</td><td>Más de 3 meses</td></tr>
+<tr><td>20</td><td>7749</td><td>SOFSE:RSAENZP-QTP</td><td>P55</td><td>2026-06-01 00:00:00</td><td>09:42:33</td><td>-26.7925</td><td>-60.44683333</td><td>104</td><td>Más de 3 meses</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.1 LÍNEA LU</h2>
+            <p><strong>Total de locomotoras:</strong> 15</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>7951</td><td>A68</td><td>2026-04-05 00:00:00</td><td>17:54:12</td><td>-31.38369444</td><td>-58.04705556</td><td>161</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>7905</td><td>N01</td><td>2026-06-23 00:00:00</td><td>07:31:50</td><td>-32.37502778</td><td>-58.87991667</td><td>82</td><td>Últimos 3 meses</td></tr>
+<tr><td>3</td><td>9405</td><td>E05</td><td>2026-08-20 00:00:00</td><td>04:58:02</td><td>-31.38516667</td><td>-58.04658333</td><td>24</td><td>Último mes</td></tr>
+<tr><td>4</td><td>6940</td><td>A02</td><td>2026-08-24 00:00:00</td><td>17:22:54</td><td>-34.12233333</td><td>-59.03136111</td><td>20</td><td>Último mes</td></tr>
+<tr><td>5</td><td>7916</td><td>N10</td><td>2026-08-28 00:00:00</td><td>12:48:58</td><td>-30.84175</td><td>-58.00919444</td><td>16</td><td>Último mes</td></tr>
+<tr><td>6</td><td>7907</td><td>I07</td><td>2026-08-28 00:00:00</td><td>19:07:08</td><td>-33.88794444</td><td>-58.88644444</td><td>16</td><td>Último mes</td></tr>
+<tr><td>7</td><td>7903</td><td>A62</td><td>2026-08-28 00:00:00</td><td>14:33:53</td><td>-30.83733333</td><td>-58.004</td><td>16</td><td>Último mes</td></tr>
+<tr><td>8</td><td>7935</td><td>E05</td><td>2026-08-28 00:00:00</td><td>10:13:59</td><td>-28.55275</td><td>-56.08363889</td><td>16</td><td>Último mes</td></tr>
+<tr><td>9</td><td>7934</td><td>U69</td><td>2026-08-28 00:00:00</td><td>13:13:36</td><td>-28.06752778</td><td>-56.033</td><td>16</td><td>Último mes</td></tr>
+<tr><td>10</td><td>7932</td><td>A66</td><td>2026-08-28 00:00:00</td><td>10:43:36</td><td>-29.50736111</td><td>-56.98041667</td><td>16</td><td>Último mes</td></tr>
+<tr><td>11</td><td>7908</td><td>T31</td><td>2026-08-29 00:00:00</td><td>15:05:34</td><td>-29.80425</td><td>-58.03597222</td><td>15</td><td>Último mes</td></tr>
+<tr><td>12</td><td>7915</td><td>E10</td><td>2026-08-29 00:00:00</td><td>14:49:48</td><td>-32.37572222</td><td>-58.88011111</td><td>15</td><td>Último mes</td></tr>
+<tr><td>13</td><td>7921</td><td>U12</td><td>2026-08-29 00:00:00</td><td>16:09:41</td><td>-30.62597222</td><td>-57.96672222</td><td>15</td><td>Último mes</td></tr>
+<tr><td>14</td><td>9404</td><td>U09</td><td>2026-08-29 00:00:00</td><td>10:05:48</td><td>-31.38516667</td><td>-58.04658333</td><td>15</td><td>Último mes</td></tr>
+<tr><td>15</td><td>7936</td><td>S10</td><td>2026-08-30 00:00:00</td><td>13:15:56</td><td>-30.83733333</td><td>-58.004</td><td>14</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.2 LÍNEA LGB</h2>
+            <p><strong>Total de locomotoras:</strong> 67</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>9781</td><td>9004</td><td>2026-03-06 00:00:00</td><td>03:39:48</td><td>-32.34016667</td><td>-61.38119444</td><td>191</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>9739</td><td>1112</td><td>2026-04-08 00:00:00</td><td>14:15:38</td><td>-24.66977778</td><td>-65.04588889</td><td>158</td><td>Más de 3 meses</td></tr>
+<tr><td>3</td><td>9738</td><td>5005</td><td>2026-05-25 00:00:00</td><td>03:42:50</td><td>-25.31630556</td><td>-64.91230556</td><td>111</td><td>Más de 3 meses</td></tr>
+<tr><td>4</td><td>9778</td><td>9003</td><td>2026-06-24 00:00:00</td><td>19:22:00</td><td>-31.37258333</td><td>-63.50966667</td><td>80</td><td>Últimos 3 meses</td></tr>
+<tr><td>5</td><td>7730</td><td>5001</td><td>2026-06-27 00:00:00</td><td>12:13:09</td><td>-33.00733333</td><td>-60.68966667</td><td>78</td><td>Últimos 3 meses</td></tr>
+<tr><td>6</td><td>9763</td><td>5004</td><td>2026-06-28 00:00:00</td><td>10:31:37</td><td>-31.38672222</td><td>-64.19161111</td><td>77</td><td>Últimos 3 meses</td></tr>
+<tr><td>7</td><td>7728</td><td>1418</td><td>2026-07-10 00:00:00</td><td>05:42:48</td><td>-31.38580556</td><td>-64.19147222</td><td>65</td><td>Últimos 3 meses</td></tr>
+<tr><td>8</td><td>7760</td><td>5002</td><td>2026-07-11 00:00:00</td><td>15:36:02</td><td>-34.24616667</td><td>-59.21975</td><td>64</td><td>Últimos 3 meses</td></tr>
+<tr><td>9</td><td>9726</td><td>5006</td><td>2026-07-13 00:00:00</td><td>23:53:01</td><td>-26.82597222</td><td>-65.21547222</td><td>61</td><td>Últimos 3 meses</td></tr>
+<tr><td>10</td><td>7703</td><td>5039</td><td>2026-07-23 00:00:00</td><td>18:32:03</td><td>-26.01527778</td><td>-62.33936111</td><td>52</td><td>Últimos 3 meses</td></tr>
+<tr><td>11</td><td>7748</td><td>1418</td><td>2026-07-30 00:00:00</td><td>18:22:03</td><td>-31.39861111</td><td>-64.17766667</td><td>45</td><td>Últimos 3 meses</td></tr>
+<tr><td>12</td><td>9784</td><td>5003</td><td>2026-08-05 00:00:00</td><td>14:41:56</td><td>-31.39711111</td><td>-64.18247222</td><td>39</td><td>Últimos 3 meses</td></tr>
+<tr><td>13</td><td>9776</td><td>9004</td><td>2026-08-10 00:00:00</td><td>06:49:55</td><td>-31.33091667</td><td>-63.62536111</td><td>34</td><td>Últimos 3 meses</td></tr>
+<tr><td>14</td><td>9724</td><td>9027</td><td>2026-08-10 00:00:00</td><td>21:11:28</td><td>-24.28086111</td><td>-65.17719444</td><td>33</td><td>Últimos 3 meses</td></tr>
+<tr><td>15</td><td>9792</td><td>9004</td><td>2026-08-16 00:00:00</td><td>06:48:31</td><td>-31.39688889</td><td>-64.16269444</td><td>28</td><td>Último mes</td></tr>
+<tr><td>16</td><td>9794</td><td>1814</td><td>2026-08-21 00:00:00</td><td>13:22:20</td><td>-32.90719444</td><td>-60.7055</td><td>23</td><td>Último mes</td></tr>
+<tr><td>17</td><td>7759</td><td>9013</td><td>2026-08-24 00:00:00</td><td>18:49:46</td><td>-25.47794444</td><td>-64.968</td><td>20</td><td>Último mes</td></tr>
+<tr><td>18</td><td>9762</td><td>7003</td><td>2026-08-24 00:00:00</td><td>02:15:27</td><td>-32.8925</td><td>-60.72305556</td><td>20</td><td>Último mes</td></tr>
+<tr><td>19</td><td>9707</td><td>5004</td><td>2026-08-24 00:00:00</td><td>06:46:29</td><td>-31.38672222</td><td>-64.19161111</td><td>20</td><td>Último mes</td></tr>
+<tr><td>20</td><td>9775</td><td>5016</td><td>2026-08-25 00:00:00</td><td>14:37:54</td><td>-27.25322222</td><td>-61.22466667</td><td>19</td><td>Último mes</td></tr>
+<tr><td>21</td><td>9779</td><td>1405</td><td>2026-08-25 00:00:00</td><td>03:56:49</td><td>-29.80355556</td><td>-64.71322222</td><td>19</td><td>Último mes</td></tr>
+<tr><td>22</td><td>9764</td><td>1816</td><td>2026-08-26 00:00:00</td><td>15:38:13</td><td>-26.89538889</td><td>-60.91816667</td><td>18</td><td>Último mes</td></tr>
+<tr><td>23</td><td>9795</td><td>9003</td><td>2026-08-26 00:00:00</td><td>19:15:02</td><td>-31.39766667</td><td>-64.16519444</td><td>18</td><td>Último mes</td></tr>
+<tr><td>24</td><td>7775</td><td>1818</td><td>2026-08-27 00:00:00</td><td>18:03:18</td><td>-32.90719444</td><td>-60.7055</td><td>17</td><td>Último mes</td></tr>
+<tr><td>25</td><td>7726</td><td>1039</td><td>2026-08-27 00:00:00</td><td>12:33:24</td><td>-26.79236111</td><td>-60.44716667</td><td>17</td><td>Último mes</td></tr>
+<tr><td>26</td><td>9788</td><td>5002</td><td>2026-08-27 00:00:00</td><td>10:13:36</td><td>-34.24980556</td><td>-59.215</td><td>17</td><td>Último mes</td></tr>
+<tr><td>27</td><td>9760</td><td>1015</td><td>2026-08-28 00:00:00</td><td>13:30:30</td><td>-32.64372222</td><td>-60.8115</td><td>16</td><td>Último mes</td></tr>
+<tr><td>28</td><td>9751</td><td>809</td><td>2026-08-28 00:00:00</td><td>12:52:47</td><td>-24.22861111</td><td>-66.31711111</td><td>16</td><td>Último mes</td></tr>
+<tr><td>29</td><td>9785</td><td>1819</td><td>2026-08-27 00:00:00</td><td>19:58:58</td><td>-24.66730556</td><td>-65.04727778</td><td>16</td><td>Último mes</td></tr>
+<tr><td>30</td><td>9765</td><td>1818</td><td>2026-08-28 00:00:00</td><td>03:26:59</td><td>-26.63802778</td><td>-60.86380556</td><td>16</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.3 LÍNEA LSM</h2>
+            <p><strong>Total de locomotoras:</strong> 107</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>8515</td><td>None</td><td>2026-03-14 00:00:00</td><td>10:23:58</td><td>-35.83580556</td><td>-61.91880556</td><td>183</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>6427</td><td>M40</td><td>2026-03-21 00:00:00</td><td>03:09:59</td><td>-31.97825</td><td>-68.47986111</td><td>176</td><td>Más de 3 meses</td></tr>
+<tr><td>3</td><td>6452</td><td>M39</td><td>2026-03-27 00:00:00</td><td>03:59:56</td><td>-31.97730556</td><td>-68.54266667</td><td>170</td><td>Más de 3 meses</td></tr>
+<tr><td>4</td><td>8503</td><td>D67</td><td>2026-04-08 00:00:00</td><td>17:25:59</td><td>-33.0605</td><td>-68.53741667</td><td>158</td><td>Más de 3 meses</td></tr>
+<tr><td>5</td><td>8458</td><td>None</td><td>2026-04-11 00:00:00</td><td>00:16:04</td><td>-38.31511111</td><td>-62.65930556</td><td>155</td><td>Más de 3 meses</td></tr>
+<tr><td>6</td><td>6465</td><td>M60</td><td>2026-04-18 00:00:00</td><td>09:13:50</td><td>-33.04577778</td><td>-68.56488889</td><td>148</td><td>Más de 3 meses</td></tr>
+<tr><td>7</td><td>8483</td><td>R73</td><td>2026-04-22 00:00:00</td><td>13:29:41</td><td>-34.60438889</td><td>-58.55947222</td><td>144</td><td>Más de 3 meses</td></tr>
+<tr><td>8</td><td>6453</td><td>R28</td><td>2026-05-06 00:00:00</td><td>15:46:35</td><td>-34.25966667</td><td>-62.71488889</td><td>130</td><td>Más de 3 meses</td></tr>
+<tr><td>9</td><td>9476</td><td>C24</td><td>2026-05-15 00:00:00</td><td>21:30:09</td><td>-34.65761111</td><td>-59.44766667</td><td>120</td><td>Más de 3 meses</td></tr>
+<tr><td>10</td><td>9455</td><td>R62</td><td>2026-05-16 00:00:00</td><td>00:47:37</td><td>-32.66469444</td><td>-60.73688889</td><td>120</td><td>Más de 3 meses</td></tr>
+<tr><td>11</td><td>9441</td><td>I46</td><td>2026-05-17 00:00:00</td><td>09:15:59</td><td>-33.01822222</td><td>-60.75333333</td><td>119</td><td>Más de 3 meses</td></tr>
+<tr><td>12</td><td>8498</td><td>R32</td><td>2026-05-30 00:00:00</td><td>04:25:04</td><td>-34.10402778</td><td>-65.07308333</td><td>106</td><td>Más de 3 meses</td></tr>
+<tr><td>13</td><td>8499</td><td>L29</td><td>2026-06-14 00:00:00</td><td>01:30:44</td><td>-34.83827778</td><td>-64.37088889</td><td>91</td><td>Más de 3 meses</td></tr>
+<tr><td>14</td><td>6451</td><td>M31</td><td>2026-06-30 00:00:00</td><td>15:34:48</td><td>-31.98661111</td><td>-68.54994444</td><td>75</td><td>Últimos 3 meses</td></tr>
+<tr><td>15</td><td>9419</td><td>I42</td><td>2026-07-08 00:00:00</td><td>02:36:48</td><td>-33.43736111</td><td>-60.78241667</td><td>67</td><td>Últimos 3 meses</td></tr>
+<tr><td>16</td><td>6440</td><td>M37</td><td>2026-07-09 00:00:00</td><td>14:25:54</td><td>-31.43722222</td><td>-68.48208333</td><td>66</td><td>Últimos 3 meses</td></tr>
+<tr><td>17</td><td>6475</td><td>M33</td><td>2026-07-14 00:00:00</td><td>17:59:05</td><td>-31.43722222</td><td>-68.48208333</td><td>61</td><td>Últimos 3 meses</td></tr>
+<tr><td>18</td><td>6466</td><td>R28</td><td>2026-07-18 00:00:00</td><td>02:58:18</td><td>-34.25766667</td><td>-62.72491667</td><td>57</td><td>Últimos 3 meses</td></tr>
+<tr><td>19</td><td>9444</td><td>C03</td><td>2026-07-17 00:00:00</td><td>21:30:41</td><td>-33.0605</td><td>-68.53741667</td><td>57</td><td>Últimos 3 meses</td></tr>
+<tr><td>20</td><td>8496</td><td>R29</td><td>2026-07-22 00:00:00</td><td>11:06:39</td><td>-34.83827778</td><td>-64.37088889</td><td>53</td><td>Últimos 3 meses</td></tr>
+<tr><td>21</td><td>8501</td><td>M60</td><td>2026-07-23 00:00:00</td><td>10:26:51</td><td>-33.04375</td><td>-68.56866667</td><td>52</td><td>Últimos 3 meses</td></tr>
+<tr><td>22</td><td>9473</td><td>F91</td><td>2026-07-24 00:00:00</td><td>14:50:44</td><td>-34.57930556</td><td>-58.42569444</td><td>51</td><td>Últimos 3 meses</td></tr>
+<tr><td>23</td><td>6442</td><td>M39</td><td>2026-08-03 00:00:00</td><td>09:43:15</td><td>-31.43008333</td><td>-68.49377778</td><td>41</td><td>Últimos 3 meses</td></tr>
+<tr><td>24</td><td>8514</td><td>R34</td><td>2026-08-06 00:00:00</td><td>04:21:42</td><td>-33.86069444</td><td>-65.17308333</td><td>38</td><td>Últimos 3 meses</td></tr>
+<tr><td>25</td><td>8510</td><td>S04</td><td>2026-08-06 00:00:00</td><td>13:27:36</td><td>-34.11986111</td><td>-63.40052778</td><td>38</td><td>Últimos 3 meses</td></tr>
+<tr><td>26</td><td>9451</td><td>I48</td><td>2026-08-11 00:00:00</td><td>13:25:10</td><td>-33.25702778</td><td>-60.37941667</td><td>33</td><td>Últimos 3 meses</td></tr>
+<tr><td>27</td><td>9474</td><td>C46</td><td>2026-08-12 00:00:00</td><td>11:51:16</td><td>-34.63858333</td><td>-58.60911111</td><td>32</td><td>Últimos 3 meses</td></tr>
+<tr><td>28</td><td>6438</td><td>R73</td><td>2026-08-13 00:00:00</td><td>13:06:42</td><td>-34.60438889</td><td>-58.55947222</td><td>31</td><td>Últimos 3 meses</td></tr>
+<tr><td>29</td><td>6472</td><td>S06</td><td>2026-08-14 00:00:00</td><td>16:51:42</td><td>-34.17497222</td><td>-61.42238889</td><td>30</td><td>Últimos 3 meses</td></tr>
+<tr><td>30</td><td>6426</td><td>S05</td><td>2026-08-18 00:00:00</td><td>12:53:09</td><td>-34.58386111</td><td>-60.94852778</td><td>26</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.4 LÍNEA SOFSE:ALIANZA-JUNIN</h2>
+            <p><strong>Total de locomotoras:</strong> 3</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>3000</td><td>P63</td><td>2026-08-11 00:00:00</td><td>23:30:44</td><td>-34.61230556</td><td>-60.50975</td><td>32</td><td>Últimos 3 meses</td></tr>
+<tr><td>2</td><td>3004</td><td>P09</td><td>2026-08-29 00:00:00</td><td>11:24:49</td><td>-33.86069444</td><td>-65.17308333</td><td>15</td><td>Último mes</td></tr>
+<tr><td>3</td><td>3003</td><td>P64</td><td>2026-08-30 00:00:00</td><td>06:12:22</td><td>-34.48622222</td><td>-59.07266667</td><td>14</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.5 LÍNEA SOFSE:GUEMES-SALTA</h2>
+            <p><strong>Total de locomotoras:</strong> 4</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>7757</td><td>P52</td><td>2026-02-23 00:00:00</td><td>21:12:11</td><td>-24.66683333</td><td>-65.0495</td><td>201</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>7923</td><td>P64</td><td>2026-08-12 00:00:00</td><td>10:56:14</td><td>-34.4795</td><td>-59.0595</td><td>32</td><td>Últimos 3 meses</td></tr>
+<tr><td>3</td><td>7927</td><td>P50</td><td>2026-08-26 00:00:00</td><td>14:05:44</td><td>-24.66683333</td><td>-65.0495</td><td>18</td><td>Último mes</td></tr>
+<tr><td>4</td><td>9703</td><td>P54</td><td>2026-08-28 00:00:00</td><td>22:19:24</td><td>-24.66683333</td><td>-65.0495</td><td>15</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.6 LÍNEA SOFSE:RES-CACUI</h2>
+            <p><strong>Total de locomotoras:</strong> 4</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>7774</td><td>P06</td><td>2026-07-08 00:00:00</td><td>06:16:13</td><td>-27.09661111</td><td>-61.09</td><td>67</td><td>Últimos 3 meses</td></tr>
+<tr><td>2</td><td>7746</td><td>P01</td><td>2026-08-26 00:00:00</td><td>14:45:26</td><td>-27.46383333</td><td>-58.98108333</td><td>18</td><td>Último mes</td></tr>
+<tr><td>3</td><td>7716</td><td>P04</td><td>2026-08-28 00:00:00</td><td>05:58:33</td><td>-27.38027778</td><td>-59.09425</td><td>16</td><td>Último mes</td></tr>
+<tr><td>4</td><td>9733</td><td>P06</td><td>2026-08-28 00:00:00</td><td>08:39:56</td><td>-27.41716667</td><td>-59.04080556</td><td>16</td><td>Último mes</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.7 LÍNEA SOFSE:RSAENZP-QTP</h2>
+            <p><strong>Total de locomotoras:</strong> 2</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>7758</td><td>P55</td><td>2026-01-25 00:00:00</td><td>09:37:26</td><td>-26.7925</td><td>-60.44683333</td><td>231</td><td>Más de 3 meses</td></tr>
+<tr><td>2</td><td>7749</td><td>P55</td><td>2026-06-01 00:00:00</td><td>09:42:33</td><td>-26.7925</td><td>-60.44683333</td><td>104</td><td>Más de 3 meses</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">🚊 3.8 LÍNEA SOFSE:TREN-NUBES</h2>
+            <p><strong>Total de locomotoras:</strong> 1</p>
+            
+            <h3 class="section-subtitle">Primeras 30 Locomotoras (ordenadas por días sin reportar)</h3>
+            <div class="table-container">
+<table class="data-table">
+<thead><tr><th>#</th><th>Locomotora</th><th>Tren</th><th>Fecha Última Pos.</th><th>Hora</th><th>Latitud</th><th>Longitud</th><th>Días Sin Reportar</th><th>Categoría</th></tr></thead>
+<tbody><tr><td>1</td><td>9710</td><td>1408</td><td>2026-02-20 00:00:00</td><td>14:55:43</td><td>-30.15572222</td><td>-64.53822222</td><td>205</td><td>Más de 3 meses</td></tr>
+</tbody></table></div></div>
+        <div class="section page-break">
+            <h2 class="section-title">📊 4. ESTADÍSTICAS DETALLADAS</h2>
+            
+            <h3 class="section-subtitle">Por Categoría de Tiempo</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Cantidad</th>
+                            <th>Porcentaje</th>
+                            <th>Días Promedio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><strong>Último mes</strong></td>
+                            <td>151</td>
+                            <td>74.4%</td>
+                            <td>15.9</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Últimos 3 meses</strong></td>
+                            <td>31</td>
+                            <td>15.3%</td>
+                            <td>52.4</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Más de 3 meses</strong></td>
+                            <td>21</td>
+                            <td>10.3%</td>
+                            <td>151.5</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section page-break">
+            <h2 class="section-title">💡 5. RECOMENDACIONES</h2>
+            
+            <div class="recommendations">
+                <h3>🔴 Acciones Inmediatas</h3>
+                <ul>
+                    <li>Verificar estado operacional de locomotoras críticas (>90 días sin reporte)</li>
+                    <li>Revisar y reparar sistemas GPS de locomotoras sin comunicación</li>
+                    <li>Contactar responsables de mantenimiento de líneas con mayor porcentaje crítico</li>
+                    <li>Priorizar locomotoras con más de 180 días sin reportar</li>
+                </ul>
+                
+                <h3>⚠️ Acciones a Mediano Plazo</h3>
+                <ul>
+                    <li>Implementar sistema de alertas automáticas para locomotoras sin reporte >7 días</li>
+                    <li>Establecer protocolo de verificación mensual de sistemas GPS</li>
+                    <li>Analizar patrones de fallas por línea y modelo de locomotora</li>
+                    <li>Capacitar personal técnico en mantenimiento preventivo de GPS</li>
+                </ul>
+                
+                <h3>✅ Mejoras Sugeridas</h3>
+                <ul>
+                    <li>Desarrollar dashboard en tiempo real de estado de flota</li>
+                    <li>Sistema de notificaciones push para locomotoras inactivas</li>
+                    <li>Análisis predictivo de fallas de GPS mediante Machine Learning</li>
+                    <li>Integración con sistemas de mantenimiento preventivo</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>Reporte generado automáticamente - Sistema de Análisis GPS</p>
+            <p>Reporte generado por Carlos Amaro | camaro@bcyl.com.ar</p>
+        </div>
+        
+    </div>
+</body>
+</html>
